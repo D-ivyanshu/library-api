@@ -27,6 +27,12 @@ export class BookService {
   }
 
   async findById(id: string): Promise<Book> {
+    const isValidId = mongoose.isValidObjectId(id);
+
+    if (!isValidId) {
+      throw new HttpException(`Id is not valid`, HttpStatus.BAD_REQUEST);
+    }
+
     const book = await this.bookModel.findById(id);
     if (!book) {
       throw new HttpException(
