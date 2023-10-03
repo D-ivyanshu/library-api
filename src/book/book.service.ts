@@ -22,7 +22,6 @@ export class BookService {
           },
         }
       : {};
-
     const books = await this.bookModel.find({ ...keyword });
     return books;
   }
